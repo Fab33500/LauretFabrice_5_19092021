@@ -2,7 +2,7 @@
 
 Cinquieme projet de ma formation Développeur Web0
 
-[Orinoco](../backend/app.js/../images/logo-orinoco.png)
+![Orinoco](../backend/app.js/../images/logo-orinoco.png)
 
 #### **_Prérequis_**
 

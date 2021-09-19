@@ -4,6 +4,8 @@
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="description" content="Orinoco est un site de vente d'ours en peluche. Tous nos articles sont fabriqué main par nos artisants" />
+		<link rel="shortcut icon" type="image/x-icon" href="../backend/images/favicon-orinoco.png" />
 
 		<link
 			rel="stylesheet"
@@ -14,12 +16,81 @@
 		<script src="https://kit.fontawesome.com/817f484293.js" crossorigin="anonymous"></script>
 		<link rel="stylesheet" href="./styles.css" />
 
-		<title>Orinoco - des ours en peluche faits à la main</title>
+		<title>Orinoco - des ours en peluche fait à la main</title>
 	</head>
 	<body>
-		<header id="header" class="header">
-			<div class="container"></div>
+		<!-- Star header-->
+		<header id="header" class="sticky-top header bg-dark">
+			<div class="container-expand">
+				<div class="row">
+					<nav class="col navbar navbar-expand-lg navbar-dark">
+						<a href="./index.html" class="navbar-brand">
+							<img class="card-img-top" src="../backend/images/logo-orinoco-trans.png" width="272" height="72" alt="Logo Orinoco" />
+						</a>
+						<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent">
+							<span class="navbar-toggler-icon"></span>
+						</button>
+						<div id="navbarContent" class="collapse navbar-collapse">
+							<ul class="navbar-nav">
+								<li class="nav-item active">
+									<a class="nav-link" href="index.html">Accueil</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" href="./order.html"><i class="fas fa-shopping-cart"></i></a>
+								</li>
+							</ul>
+						</div>
+					</nav>
+				</div>
+			</div>
 		</header>
+		<!-- End header-->
+		<div class="jumbotron">
+			<div class="jumbotron-content-backgroud">
+				<h1 class="jumbotron-content title-jumbotron-lg text-center">Bienvenue sur le site d'Orinico</h1>
+				<p class="jumbotron-content subtitle-jumbotron-lg subtitle-jumbotron-md text-center">Nos Ours en peluche sont fabriqué main par nos artisants</p>
+			</div>
+			<img class="card-img-top" src="../backend/images/bear.jpg" alt="" />
+		</div>
+		<main id="main " class="main container">
+			<div class="col-12 col-md-6 col-lg-4 card border border-primary">
+				<a href="./product.html">
+					<div class="card-body">
+						<img class="card-img-top" src="https://via.placeholder.com/250 " alt="" />
+						<h5 class="card-title text-center">Titre de la carte</h5>
+						<p class="card-text description">Contenu textuel de la carteContenu textuel de la carteContenu textuel de la carte</p>
+						<div class="d-flex card-price-chevron">
+							<div class="card-price">20€</div>
+							<div class="card-chevron">
+								<i class="fas fa-star"></i>
+								<i class="fas fa-star"></i>
+								<i class="fas fa-star"></i>
+								<i class="fas fa-star"></i>
+								<i class="fas fa-star"></i>
+							</div>
+						</div>
+					</div>
+				</a>
+			</div>
+		</main>
+		<!-- Star footer-->
+		<footer id="footer" class="footer container-expand bg-dark">
+			<div class="container-expand">
+				<div class="row">
+					<div class="col footer-info">
+						<ul class="list-inline text-center">
+							<li class="list-inline-item"><a href="#">À propos</a></li>
+							<li class="list-inline-item">;</li>
+							<li class="list-inline-item"><a href="#">Vie privée</a></li>
+							<li class="list-inline-item"></li>
+							<li class="list-inline-item"><a href="#">Conditions d'utilisations</a></li>
+						</ul>
+						<div class="copy text-center">fabrice lauret</div>
+					</div>
+				</div>
+			</div>
+		</footer>
+		<!-- End footer-->
 
 		<script
 			src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"

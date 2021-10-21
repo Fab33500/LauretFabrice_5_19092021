@@ -63,6 +63,8 @@ a:hover {
 
 /* main */
 .main {
+	display: flex;
+	flex-wrap: wrap;
 	margin-bottom: 32px;
 }
 
@@ -70,9 +72,13 @@ a:hover {
 	padding: 2px;
 }
 .card {
+	width: 200px;
+	margin: 10px;
 	padding: 2px;
 }
-
+.card-img-list {
+	height: 250px;
+}
 .card-title {
 	margin-top: 12px;
 }
@@ -104,4 +110,10 @@ a:hover {
 	color: #fff;
 	padding: 10px 0 0 0;
 	border-top: 1px solid #fff;
+}
+
+/* html du js */
+#imgApi {
+	width: 400px;
+	height: 400px;
 }

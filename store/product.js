@@ -33,7 +33,7 @@ fetch(`http://localhost:3000/api/teddies/${idRecovery}`)
 		/>
 		<div class="col-12 col-lg-6 product-description">
 			<div id="card-title-content" class="card-title-product-content">
-				<div class="d-flex justify-content-between align-content-center card-title-stars">
+				<div class=" card-title-stars">
 					<h5 class="card-title">${name}</h5>
 					<div class="d-flex align-items-center  card-chevron">
 						<i class="fas fa-star"></i>
@@ -43,11 +43,11 @@ fetch(`http://localhost:3000/api/teddies/${idRecovery}`)
 						<i class="fas fa-star"></i>
 					</div>
 				</div>
-					<p class=" card-text description">${description}</p>
-					<select id="select-color">${colorHtml}</select>
+					<p class="mt-lg-5 card-text description">${description}</p>
+					<select id="select-color" class="mt-lg-5">${colorHtml}</select>
 
 					<a href="./order.html">
-					<button type="button" id="send-cart" class=" col-12 btn btn-primary">
+					<button type="button" id="send-cart" class=" mt-5 col-12 btn btn-primary">
 					Ajouter au panier
 					<div class="card-price-product">${euroPrice}€</div>
 					</button>

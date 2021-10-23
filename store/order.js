@@ -49,7 +49,7 @@ const recoveryForm = () => {
 		<p id="form--info">Tous les champs du formulaire doivent etre renseigner</p>
 		<input type="button" id="submit" class="col-md-12 btn btn-primary btn-block" value ="Validez vos coordonnées"/>
 	
-		</form-row>
+	</form-row>
 		`;
 };
 recoveryForm();
@@ -242,24 +242,26 @@ newDiv.setAttribute("id", "section-cart");
 newDiv.setAttribute("class", " col-12 col-lg-6");
 
 newDiv.innerHTML = `
-<h2 class="col-6">Votre panier</h2>
 <div class="row">
-	<h1 class="col teddy-name">${cart[0].name}</h1>
-	<p class="col-6 ref">Ref: ${cart[0].id}</p>
+<h2 class="m-lg-5 m-3 col-lg-10 text-center">Votre panier</h2>
+</div>
+<div class="d-block row">
+	<h2 class="mb-2 ml-2 teddy-name teddy-name-order">${cart[0].name}</h2>
+	<p class="ml-3 ref ref-order ">Ref: ${cart[0].id}</p>
 </div>
 
-<div class="row">
-	<div class="d-flex form-row col-6">
+<div class="d-flex my-lg-5 justify-content-between row">
+	<div class="d-flex form-row col-8 ">
 		<input type="button" id="decrement" class="minus" value=" - " />
-		<input type="text" id="quantity" value="1" />
+		<input type="text" class="w-50" id="quantity" value="1" />
 		<input type="button" id="increment" class="plus" value="+" />
 	</div>
 	<div class="row">
-		<p class="col-6 prix">${cart[0].price}€</p>
+		<p class="m-auto col-6 prix">${cart[0].price}€</p>
 	</div>
 </div>
-<div class="row">
-	<button type="submit" id="submit" class="col-md-12 btn btn-primary btn-block">Finaliser le paiement</button>
+<div class="row pt-4">
+	<button type="submit" id="submit" class=" mt-lg-5 col-md-12 btn btn-primary btn-block btn-submit">Finaliser le paiement</button>
 	</div>
 `;
 

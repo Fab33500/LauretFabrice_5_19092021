@@ -52,12 +52,69 @@
 		</div>
 
 		<main id="main-order" class="justify-content-around main main-order container">
-			<!-- formulaire commande -->
 			<h1 id="order-title" class="m-2 order-title">Bienvenue sur votre page de commande</h1>
 			<p id="order-subtitle">Merci de renseigner les champs ci dessous et de verifier votre commande avant de valider</p>
+
+			<!-- formulaire commande -->
+
+			<section id="section-form" class="col-sm-12 col-lg-6">
+				<form action="./confirm.html" method="POST" name="form" id="infos-form">
+					<div class="form-row col-lg-12">
+						<div class="form-group col-lg-6">
+							<label for="firstName">Nom</label>
+							<input type="text" class="form-control" id="firstName" placeholder="Nom" name="firstName" />
+							<small></small>
+						</div>
+
+						<div class="form-group col-lg-6">
+							<label for="lastname">Prenom</label>
+							<input type="text" class="form-control" id="lastname" placeholder="Prénom" name="lastname" />
+							<small></small>
+						</div>
+
+						<div class="form-group col-md-12">
+							<label for="email">Email</label>
+							<input type="email" class="form-control" id="email" placeholder="JohnDoe@mail.fr" name="email" />
+							<small></small>
+						</div>
+
+						<div class="form-group col-md-12">
+							<label for="address">Addresse</label>
+							<input type="text" class="form-control" id="address" placeholder="12 rte..." name="address" />
+							<small></small>
+						</div>
+
+						<div class="form-group col-md-7">
+							<label for="city">ville</label>
+							<input type="text" class="form-control" id="city" placeholder="Bordeaux" name="city" />
+							<small></small>
+						</div>
+
+						<div class="form-group col-md-5">
+							<label for="zip">Code postal</label>
+							<input type="text" class="form-control" id="zip" placeholder="33000" name="zip" />
+							<small></small>
+						</div>
+
+						<p id="form--info">Tous les champs du formulaire doivent etre renseigner</p>
+						<input type="button" id="validate" class="col-md-12 btn btn-primary btn-block" value="Validez vos coordonnées" />
+					</div>
+				</form>
+			</section>
+
 			<!-- fin formulaire commande -->
 
 			<!-- panier -->
+
+			<section id="section-cart" class="col-12 col-lg-6">
+				<div class="row">
+					<h2 class="m-lg-5 m-3 col-lg-10 text-center">Votre panier</h2>
+				</div>
+				<div id="show-cart" class="d-flex show-cart-empty justify-content-between align-items-center name-cart d-block row"></div>
+				<div class="row pt-4">
+					<button type="submit" id="submit" class="mt-lg-5 col-md-12 btn btn-primary btn-block btn-submit" disabled>Finaliser le paiement</button>
+				</div>
+			</section>
 
 			<!-- fin du panier -->
 		</main>

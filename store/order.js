@@ -2,117 +2,51 @@ let mainOrder = document.querySelector("#main-order");
 console.log(mainOrder);
 
 /**************  section form ********************/
-let newDiv;
-//  recuperation du formulaire
-const recoveryForm = () => {
-	newDiv = document.createElement("section");
-	newDiv.setAttribute("id", "section-form");
-	newDiv.setAttribute("class", "col-sm-12 col-lg-6");
-	newDiv.innerHTML = `<form action="./confirm.html" method="POST" name="form" id="infos-form">
-	<div class="form-row  col-lg-12">
-		<div class="form-group col-lg-6">
-			<label for="name">Nom</label>
-			<input type="text" class="form-control" id="name" placeholder="Nom" name="name" />
-			<small></small>
-		</div>
-	
-		<div class="form-group col-lg-6">
-			<label for="lastname">Prenom</label>
-			<input type="text" class="form-control" id="lastname" placeholder="Prénom" name="lastname" />
-			<small></small>
-		</div>
-	
-		<div class="form-group col-md-12">
-			<label for="email">Email</label>
-			<input type="email" class="form-control" id="email" placeholder="JohnDoe@mail.fr" name="email" />
-			<small></small>
-		</div>
-	
-		<div class="form-group col-md-12">
-			<label for="address">Addresse</label>
-			<input type="text" class="form-control" id="address" placeholder="12 rte..." name="address" />
-			<small></small>
-		</div>
-	
-		<div class="form-group col-md-7">
-			<label for="city">ville</label>
-			<input type="text" class="form-control" id="city" placeholder="Bordeaux" name="city" />
-			<small></small>
-		</div>
-	
-		<div class="form-group col-md-5">
-			<label for="zip">Code postal</label>
-			<input type="text" class="form-control" id="zip" placeholder="33000" name="zip" />
-			<small></small>
-		</div>
-	
-		<p id="form--info">Tous les champs du formulaire doivent etre renseigner</p>
-		<input type="button" id="submit" class="col-md-12 btn btn-primary btn-block" value ="Validez vos coordonnées"/>
-	
-	</form-row>
-		`;
-};
-recoveryForm();
-mainOrder.appendChild(newDiv);
 
 // selection bouton envoi formulaire
-const submit = document.querySelector("#submit");
-console.log(submit);
+const validate = document.querySelector("#validate");
+console.log(validate);
 
 /**************/
 
-submit.addEventListener("click", (e) => {
+validate.addEventListener("click", (e) => {
 	e.preventDefault();
 	// recuperation des valeurs du formulaire
 	const formHtml = {
-		name: document.querySelector("#name").value,
+		firstName: document.querySelector("#firstName").value,
 		lastname: document.querySelector("#lastname").value,
 		email: document.querySelector("#email").value,
 		address: document.querySelector("#address").value,
 		city: document.querySelector("#city").value,
 		zip: document.querySelector("#zip").value,
 	};
-	console.log(formHtml);
 
-	//  mise de l'objet dans localStorage
-	localStorage.setItem("formHtml", JSON.stringify(formHtml));
-
-	// envoi du cart et du formulaire la page de confirmation
-	const confirm = {
-		formHtml,
-		cart,
-	};
-	console.log(confirm);
+	if (firstName.value == "" || lastname.value == "" || email.value == "" || address.value == "" || city.value == "" || zip.value == "") {
+		e.preventDefault();
+		alert("merci de remplir tous les champs");
+	} else {
+		// //  mise de l'objet dans localStorage
+		localStorage.setItem("formHtml", JSON.stringify(formHtml));
+	}
 });
 
 //**************** validation du formulaire ******************
 
-// ecouter le bouton de paiement et empecher l'envoi si non conforme
-let form = document.querySelector("#infos-form");
-
-form.addEventListener("click", function (e) {
-	if (validName == "" || validLastname == "" || validEmail == "" || validAddress == "" || validCity == "" || validZip == "") {
-		e.preventDefault();
-		alert("merci de remplir tous les");
-		console.log("hello");
-	}
-});
-
 //**************** validation du nom ******************
 // ecouter la modification du nom
-form.name.addEventListener("change", function () {
+form.firstName.addEventListener("change", function () {
 	validName(this);
 });
 
-const validName = (inputName) => {
+const validName = (inputfirstName) => {
 	// creation regExp validation du nom
 	let nameRegExp = new RegExp("^[ \u00c0-\u01ffa-zA-Z'-]+$");
-	let testName = nameRegExp.test(inputName.value);
+	let testfirstName = nameRegExp.test(inputfirstName.value);
 	// recuperation du small juste apres l'input name
-	let small = inputName.nextElementSibling;
+	let small = inputfirstName.nextElementSibling;
 
 	// test de l'expression reguliere
-	testValidInput(small, testName);
+	testValidInput(small, testfirstName);
 };
 
 //**************** validation du prénom ******************
@@ -220,6 +154,7 @@ function smallAdd(small) {
 		small.innerHTML = "Le champ est valide";
 		small.classList.remove("text-warning");
 		small.classList.add("text-success");
+		validate.disabled = false;
 		return true;
 	}
 }
@@ -228,82 +163,118 @@ function smallRemove(small) {
 		small.innerHTML = "La saisie ne correspond pas au champ ";
 		small.classList.remove("text-success");
 		small.classList.add("text-warning");
+		validate.disabled = true;
 		return false;
 	}
 }
 
-// section pannier
+//************************section pannier**********************
 
-//recuperation de l'article
-const cart = JSON.parse(localStorage.getItem("cart"));
+//recuperation du panier dans le localStorage
+let cart = JSON.parse(localStorage.getItem("cart"));
+console.log(cart);
 
-newDiv = document.createElement("section");
-newDiv.setAttribute("id", "section-cart");
-newDiv.setAttribute("class", " col-12 col-lg-6");
+const showCart = document.querySelector("#show-cart");
+const showCartEmpty = document.querySelector(".show-cart-empty");
+console.log(showCart);
 
-newDiv.innerHTML = `
-<div class="row">
-<h2 class="m-lg-5 m-3 col-lg-10 text-center">Votre panier</h2>
-</div>
-<div class="d-block row">
-	<h2 class="mb-2 ml-2 teddy-name teddy-name-order">${cart[0].name}</h2>
-	<p class="ml-3 ref ref-order ">Ref: ${cart[0].id}</p>
-</div>
-
-<div class="d-flex my-lg-5 justify-content-between row">
-	<div class="d-flex form-row col-8 ">
-		<input type="button" id="decrement" class="minus" value=" - " />
-		<input type="text" class="w-50" id="quantity" value="1" />
-		<input type="button" id="increment" class="plus" value="+" />
+// si panier vide
+if (cart === null || cart == 0) {
+	submit.disabled = true;
+	showCartEmpty.innerHTML = `
+	<div class="container-empty-cart col-12 " >
+		<div class= "col-12 offset-3"> Aucun article dans votre panier </div>
+		<a class="col-6 offset-3 btn btn-primary addArticle" href="./index.html" role="button">Ajouter des articles</a>
 	</div>
-	<div class="row">
-		<p class="m-auto col-6 prix">${cart[0].price}€</p>
-	</div>
-</div>
-<div class="row pt-4">
-	<button type="submit" id="submit" class=" mt-lg-5 col-md-12 btn btn-primary btn-block btn-submit">Finaliser le paiement</button>
-	</div>
-`;
+	`;
+	// supprime le bouton "vider le panier" si le panier est vide
+	btnDeletCart.style.display = "none";
+} else {
+	let totalCart = [];
+	for (let n = 0; n < cart.length; n++) {
+		console.log(cart.length);
+		totalCart =
+			totalCart +
+			`
+			<div class="d-block col-sm-12 col-md-6 row">
+			<h2 class="col-4 name-cart-item teddy-name teddy-name-order">${cart[n].name}</h2>
+			<p class="name-cart-item ref ref-order">Ref: ${cart[n].id}</p>
+		</div>
+		<div class="form-row form-compt col-3">
+			<div class="d-flex plus-minus-row col-2 ">
+				<div type="button" id="decrement" class="minus"   />
+					<i class="square fas fa-caret-square-up"></i>
+				</div>
+				<div type="button" id="increment" class="plus"  />
+					<i class="square fas fa-caret-square-down"></i>
+				</div>
+			</div>
+			<input type="text" id="quantity" value="1" />
+		</div>
+		<p class="total-price name-cart-item col-2 mt-3">${cart[n].price}€</p>
+		<button type="button" id="send-cart" class=" btn-delete btn-dark ">X</button>
+	</div>			
+		`;
 
-mainOrder.appendChild(newDiv);
-
-let valueCount;
-let prix = document.querySelector("prix");
-let inputMinus = document.querySelector(".minus");
-let inputPlus = document.querySelector(".plus");
-
-// ecouter le bouton plus
-document.querySelector("#increment").addEventListener("click", function () {
-	valueCount = document.querySelector("#quantity").value;
-	valueCount++;
-	document.querySelector("#quantity").value = valueCount;
-	// desactivation bouton plus si il vaut 10 et desactive le bouton moins
-	if (valueCount >= 10) {
-		inputPlus.disabled = true;
+		if (cart.length) {
+			showCart.innerHTML = totalCart;
+		}
 	}
-	if (inputPlus) {
-		inputMinus.disabled = false;
+
+	submit.disabled = false;
+	console.log("pas vide");
+}
+
+// suppression des produits du pannier
+let btnDelete = document.querySelectorAll(".btn-delete");
+console.log(btnDelete);
+
+for (let d = 0; d < btnDelete.length; d++) {
+	btnDelete[d].addEventListener("click", (e) => {
+		e.preventDefault();
+
+		// selection id à supprimer
+		let idDelete = cart[d].id;
+		console.log(idDelete);
+		// methode filter pour creer un nouveau tableau lors de la supression d'un element
+		cart = cart.filter((el) => el.id !== idDelete);
+		console.log(cart);
+		// envoyer dans local Storage
+		localStorage.setItem("cart", JSON.stringify(cart));
+		// réactualiser la page
+		location.reload();
+	});
+}
+
+// ********************* vider le panier *********************
+
+// création btn vider panier insertion dans le html
+showCart.insertAdjacentHTML(
+	"afterend",
+	`<button class="btn-delete-cart btn-delete-purchasing">Vider le panier</button>
+	<button class=" btn-purchasing btn-delete-purchasing">Continuer les achats</button>
+`
+);
+
+//  fonction popup suppression panier
+function popupDeleteCart() {
+	if (window.confirm("OK pour supprimer le panier ou ANNULER pour rester sur le panier")) {
+		localStorage.removeItem("cart");
+		location.reload();
 	}
-	console.log(quantity.value);
-	console.log(cart[0].price);
-	console.log(quantity.value * cart[0].price + "€");
+}
+
+// selection du btn
+const btnDeletCart = document.querySelector(".btn-delete-cart");
+const btnPurchasing = document.querySelector(".btn-purchasing");
+
+// supprimer la key "cart" dans localStorage
+btnDeletCart.addEventListener("click", (e) => {
+	e.preventDefault();
+	popupDeleteCart();
 });
 
-// ecouter le bouton moins
-document.querySelector("#decrement").addEventListener("click", function () {
-	valueCount = document.querySelector("#quantity").value;
-	valueCount--;
-	document.querySelector("#quantity").value = valueCount;
-
-	// desactivation bouton moins si il vaut 1
-	if (valueCount < 1) {
-		inputMinus.disabled = true;
-	}
-
-	if (document.querySelector("#increment")) {
-		inputPlus.disabled = false;
-	}
-
-	console.log(quantity.value);
-	console.log(valueCount * cart[0].price + "€");
+// continuer les achats
+btnPurchasing.addEventListener("click", () => {
+	window.location.href = "./index.html";
 });

@@ -47,7 +47,7 @@ fetch(`http://localhost:3000/api/teddies/${idRecovery}`)
 					<select id="select-color" class="mt-lg-5">${colorHtml}</select>
 
 					<a href="./order.html">
-					<button type="button" id="send-cart" class=" mt-5 col-12 btn btn-primary">
+					<button type="button" id="send-cart" class=" mt-5 col-12 btn btn-primary ">
 					Ajouter au panier
 					<div class="card-price-product">${euroPrice}€</div>
 					</button>
@@ -61,27 +61,31 @@ fetch(`http://localhost:3000/api/teddies/${idRecovery}`)
 		const sendCart = document.querySelector("#send-cart");
 		console.log(sendCart);
 
+		//  Création du panier
 		let cart;
 		const article = {
 			id: _id,
 			name: name,
 			price: euroPrice,
 		};
-		console.log(article);
+		console.log(article.name);
+
+		//  Création fonction ajout au panier dans le localStorage
 		function addProduct(teddy) {
 			cart = JSON.parse(localStorage.getItem("cart"));
-			if (cart === null) {
-				cart = [];
-			}
-			cart.push(teddy);
-			localStorage.setItem("cart", JSON.stringify(cart));
-		}
 
+			if (cart) {
+				cart.push(teddy);
+				localStorage.setItem("cart", JSON.stringify(cart));
+			} else {
+				cart = [];
+				cart.push(teddy);
+				localStorage.setItem("cart", JSON.stringify(cart));
+			}
+		}
 		sendCart.addEventListener("click", () => {
 			addProduct(article);
-			console.log(cart);
 		});
-		localStorage.clear();
 	})
 	.catch((error) => {
 		alert("Une erreur est survenue !");

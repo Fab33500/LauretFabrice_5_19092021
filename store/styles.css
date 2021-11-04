@@ -114,9 +114,52 @@ a:hover {
 .ref-order {
 	font-size: 1em;
 }
+.name-cart-item {
+	margin: 0;
+}
+
+.container-empty-cart {
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+}
+
+#quantity {
+	width: 40px;
+	position: relative;
+}
+#increment,
+#decrement {
+	overflow: hidden;
+}
+
+.form-compt {
+	flex-wrap: nowrap;
+	flex-direction: row-reverse;
+	padding: 0;
+	height: 30px;
+	min-width: 120px;
+}
+
+.plus-minus-row {
+	flex-direction: column;
+	padding-right: 1px !important;
+}
+.square {
+	position: relative;
+	top: -4px;
+}
+
+/* .btn-delete-purchasing {
+	margin: 20px 15px 0 50px;
+} */
+#oo {
+	margin: 20px auto;
+	max-width: 350px;
+}
 
 .btn-submit {
-	margin-top: 2.42rem !important;
+	margin-top: 1.4rem !important;
 }
 
 @media screen and (max-width: 768px) {

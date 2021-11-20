@@ -63,37 +63,37 @@
 						<div class="form-group col-lg-6">
 							<label for="firstName">Nom</label>
 							<input type="text" class="form-control" id="firstName" placeholder="Nom" name="firstName" />
-							<small></small>
+							<infoMsgElt></infoMsgElt>
 						</div>
 
 						<div class="form-group col-lg-6">
 							<label for="lastname">Prenom</label>
 							<input type="text" class="form-control" id="lastname" placeholder="Prénom" name="lastname" />
-							<small></small>
+							<infoMsgElt></infoMsgElt>
 						</div>
 
 						<div class="form-group col-md-12">
 							<label for="email">Email</label>
 							<input type="email" class="form-control" id="email" placeholder="JohnDoe@mail.fr" name="email" />
-							<small></small>
+							<infoMsgElt></infoMsgElt>
 						</div>
 
 						<div class="form-group col-md-12">
 							<label for="address">Addresse</label>
 							<input type="text" class="form-control" id="address" placeholder="12 rte..." name="address" />
-							<small></small>
+							<infoMsgElt></infoMsgElt>
 						</div>
 
 						<div class="form-group col-md-7">
 							<label for="city">ville</label>
 							<input type="text" class="form-control" id="city" placeholder="Bordeaux" name="city" />
-							<small></small>
+							<infoMsgElt></infoMsgElt>
 						</div>
 
 						<div class="form-group col-md-5">
 							<label for="zip">Code postal</label>
 							<input type="text" class="form-control" id="zip" placeholder="33000" name="zip" />
-							<small></small>
+							<infoMsgElt></infoMsgElt>
 						</div>
 
 						<p id="form--info">Tous les champs du formulaire doivent etre renseigner</p>
@@ -110,7 +110,7 @@
 				<div class="row">
 					<h2 class="m-lg-5 m-3 col-lg-10 text-center">Votre panier</h2>
 				</div>
-				<div id="show-cart" class="d-flex show-cart-empty justify-content-between align-items-center name-cart d-block row"></div>
+				<div id="basket" class="d-flex basket-empty basket-full justify-content-between align-items-center name-cart d-block row"></div>
 				<div class="row pt-4">
 					<button type="submit" id="submit" class="mt-lg-5 col-md-12 btn btn-primary btn-block btn-submit" disabled>Finaliser le paiement</button>
 				</div>
@@ -140,6 +140,7 @@
 		<!-- End footer-->
 
 		<script src="./order.js"></script>
+
 		<!-- jQuery first, then Popper.js, then Bootstrap JS -->
 		<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 		<script

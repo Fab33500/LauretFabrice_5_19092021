@@ -15,6 +15,11 @@ a:hover {
 	color: #bea512;
 }
 
+.row {
+	margin-right: 0;
+	margin-left: 0;
+}
+
 /* navbar */
 #navbarContent {
 	justify-content: flex-end;
@@ -147,6 +152,17 @@ a:hover {
 	margin: 0;
 }
 
+h2.col-4.name-cart-item.teddy-name.teddy-name-order {
+	max-width: initial;
+}
+
+.row-teddy {
+	border: 1px solid #007bff;
+	margin: 2px 0 0 0;
+	padding: 1px;
+	justify-content: space-between;
+}
+
 .container-empty-cart {
 	display: flex;
 	flex-direction: column;
@@ -154,12 +170,21 @@ a:hover {
 }
 
 #quantity {
-	width: 45px;
 	position: relative;
 }
 #increment,
 #decrement {
 	overflow: hidden;
+}
+
+.btn-delete-purchasing {
+	width: 160px !important;
+}
+
+#delete-purchasing {
+	display: flex !important;
+	flex-wrap: wrap;
+	justify-content: space-around;
 }
 
 .form-compt {
@@ -183,7 +208,7 @@ a:hover {
 	margin: 20px 15px 0 50px;
 }
 
-.btn-submit {
+#sendOrder {
 	margin-top: 1.4rem !important;
 }
 
@@ -191,6 +216,16 @@ a:hover {
 	.order-title {
 		font-size: 25px;
 	}
+}
+
+/* page confirm */
+.bold {
+	font-weight: bolder;
+}
+
+/* order */
+.total-price {
+	padding-left: 0 !important;
 }
 
 /* footer */

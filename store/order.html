@@ -55,10 +55,26 @@
 			<h1 id="order-title" class="m-2 order-title">Bienvenue sur votre page de commande</h1>
 			<p id="order-subtitle">Merci de renseigner les champs ci dessous et de verifier votre commande avant de valider</p>
 
+			<!-- panier -->
+
+			<section id="section-cart" class="col-12 col-lg-6">
+				<div class="row">
+					<h2 class="m-lg-5 m-3 col-lg-10 text-center">Votre panier</h2>
+				</div>
+				<div id="basket" class="d-flex basket-empty basket-full justify-content-between align-items-center name-cart d-block row"></div>
+				<div id="delete-purchasing">
+					<button class="btn-purchasing btn-delete-purchasing btn-primary">Continuer les achats</button>
+					<button class="btn-delete-cart btn-delete-purchasing btn-primary">Vider le panier</button>
+					<h3 class="show-price-html mt-3 text-right"></h3>
+				</div>
+			</section>
+
+			<!-- fin du panier -->
+
 			<!-- formulaire commande -->
 
 			<section id="section-form" class="col-sm-12 col-lg-6">
-				<form action="./confirm.html" method="POST" name="form" id="infos-form">
+				<form name="form" id="infos-form">
 					<div class="form-row col-lg-12">
 						<div class="form-group col-lg-6">
 							<label for="firstName">Nom</label>
@@ -67,8 +83,8 @@
 						</div>
 
 						<div class="form-group col-lg-6">
-							<label for="lastname">Prenom</label>
-							<input type="text" class="form-control" id="lastname" placeholder="Prénom" name="lastname" />
+							<label for="lastName">Prenom</label>
+							<input type="text" class="form-control" id="lastName" placeholder="Prénom" name="lastName" />
 							<infoMsgElt></infoMsgElt>
 						</div>
 
@@ -95,28 +111,12 @@
 							<input type="text" class="form-control" id="zip" placeholder="33000" name="zip" />
 							<infoMsgElt></infoMsgElt>
 						</div>
-
-						<p id="form--info">Tous les champs du formulaire doivent etre renseigner</p>
-						<input type="button" id="validate" class="col-md-12 btn btn-primary btn-block" value="Validez vos coordonnées" />
 					</div>
 				</form>
 			</section>
+			<input type="button" id="sendOrder" class="col-md-12 btn btn-primary btn-block" value="Validez votre commande" />
 
 			<!-- fin formulaire commande -->
-
-			<!-- panier -->
-
-			<section id="section-cart" class="col-12 col-lg-6">
-				<div class="row">
-					<h2 class="m-lg-5 m-3 col-lg-10 text-center">Votre panier</h2>
-				</div>
-				<div id="basket" class="d-flex basket-empty basket-full justify-content-between align-items-center name-cart d-block row"></div>
-				<div class="row pt-4">
-					<button type="submit" id="submit" class="mt-lg-5 col-md-12 btn btn-primary btn-block btn-submit" disabled>Finaliser le paiement</button>
-				</div>
-			</section>
-
-			<!-- fin du panier -->
 		</main>
 
 		<!-- Star footer-->
@@ -140,6 +140,7 @@
 		<!-- End footer-->
 
 		<script src="./order.js"></script>
+		<script src="./confirm.js"></script>
 
 		<!-- jQuery first, then Popper.js, then Bootstrap JS -->
 		<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>

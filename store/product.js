@@ -1,31 +1,7 @@
-//  Recuperation de l'URL du produit
-const getUrl = window.location.search;
-console.log(getUrl);
-
-//  Supression du "?" recuperé avec getUrl
-const productUrl = getUrl.slice(1);
-
-// appel de l'API avec son ID
-
-fetch(`http://localhost:3000/api/teddies/${productUrl}`)
-	.then((response) => {
-		if (response.ok) {
-			return response.json();
-		}
-	})
-
-	.then(({ name, description, price, colors, imageUrl, _id /* recuperation tableau de l'API*/ }) => {
-		// recuperation de la liste des couleurs
-		let colorHtml = "";
-		colors.forEach((singleColor) => {
-			colorHtml += `<option value="${singleColor}">${singleColor}</option>`;
-		});
-
-		const euroPrice = price / 100;
-
-		const teddyElt = document.querySelector(".main-product");
-
-		teddyElt.innerHTML = `<div class="d-flex flex-wrap col-12  card-product border border-primary">
+// ***************************** FONCTIONS ******************************
+//Fonction ajout article sur page product
+function addArticleHtml(imageUrl, name, euroPrice, description, colorHtml) {
+	document.querySelector(".main-product").innerHTML = `<div class="d-flex flex-wrap col-12  card-product border border-primary">
 		<img
 			class="col-12 col-lg-6 card-img-product"
 			src="${imageUrl}"
@@ -51,7 +27,7 @@ fetch(`http://localhost:3000/api/teddies/${productUrl}`)
 				<div class="d-flex cart-input">
 				<div class="d-flex cart-quantity-color">
 					<label>Quantité:</label>	
-					<input type="number" class="quantity-product" name="quantity-product" min="1" max="10" value = "0"</p>
+					<input type="number" class="quantity-product" name="quantity-product" min="1" max="10" value = "1" >
 				</div>
 
 				<div class="d-flex cart-quantity-color">
@@ -69,78 +45,96 @@ fetch(`http://localhost:3000/api/teddies/${productUrl}`)
 				</div>
 			</div>
 		</div>`;
+}
+
+// envoi dans le localstorage
+const addTeddy = (teddy) => {
+	let cart = JSON.parse(localStorage.getItem("cart")) || [];
+	cart.push(teddy);
+
+	localStorage.setItem("cart", JSON.stringify(removeDuplicates(cart)));
+};
+
+// supression des doublons du panier
+function removeDuplicates(addcart) {
+	let newCart = [];
+	let uniqueProduct = {};
+
+	// Boucle pour les éléments du tableau
+	for (let i in addcart) {
+		//Recuperation de l'Id
+		let productId = addcart[i]["id"];
+
+		uniqueProduct[productId] = addcart[i];
+	}
+
+	// Boucle pour mettre l'objet unique dans le tableau
+	for (let i in uniqueProduct) {
+		newCart.push(uniqueProduct[i]);
+	}
+
+	// Afficher les objets uniques
+	return newCart;
+}
+
+// *******************************************************************************
+
+//  Recuperation de l'URL du produit
+const getUrl = window.location.search;
+
+//  Supression du "?" recuperé avec getUrl
+const productUrl = getUrl.slice(1);
+
+// *********************************************************************************
+// appel de l'API avec son ID
+
+fetch(`http://localhost:3000/api/teddies/${productUrl}`)
+	.then((response) => {
+		if (response.ok) {
+			return response.json();
+		}
+	})
+
+	.then(({ name, description, price, colors, imageUrl, _id /* recuperation tableau de l'API*/ }) => {
+		// recuperation de la liste des couleurs
+		let colorHtml = "";
+		colors.forEach((singleColor) => {
+			colorHtml += `<option value="${singleColor}">${singleColor}</option>`;
+		});
+
+		const euroPrice = price / 100;
+
+		addArticleHtml(imageUrl, name, euroPrice, description, colorHtml);
 
 		//   ---------------------------Quantité produits----------------
 		// selection du bouton ajouter au panier
 		const sendCart = document.querySelector("#send-cart");
-		console.log(sendCart);
 
 		const quantity = document.querySelector(".quantity-product");
-		// controle de l'ajout de la quantité
-		if (quantity.value <= 0 || quantity.value == null) {
-			console.log("ok c -");
-			sendCart.disabled = true;
-		}
 
-		// recuperation de la quantité
-		function test() {
-			quantity.addEventListener("input", () => {
-				if (quantity.value <= 0 || quantity.value == null || quantity.value > 10) {
-					sendCart.disabled = true;
-				} else {
-					sendCart.disabled = false;
-					console.log(quantity.value);
-					let totalProduct = quantity.value * euroPrice;
-
-					document.querySelector(".card-total-price-product").innerHTML = `total Articles : ${totalProduct}€`;
-					localStorage.setItem("price", JSON.stringify(totalProduct));
-				}
-			});
-		}
-		test();
-
-		//   ---------------------------Panier---------------------------
-
-		//  Création du panier
-		let cart;
-		const article = {
-			id: _id,
-			name: name,
-			price: euroPrice,
-		};
-
-		//  Création fonction ajout au panier dans le localStorage
-		function addTeddy(teddy) {
-			cart = JSON.parse(localStorage.getItem("cart"));
-
-			if (cart) {
-				cart.push(teddy);
-
-				localStorage.setItem("cart", JSON.stringify(cart));
+		// controle de la quantite mini et maxi
+		quantity.addEventListener("change", () => {
+			if (quantity.value < 1 || quantity.value == null || quantity.value > 10) {
+				sendCart.disabled = true;
 			} else {
-				cart = [];
-				cart.push(teddy);
+				sendCart.disabled = false;
 
-				localStorage.setItem("cart", JSON.stringify(cart));
+				let totalProduct = quantity.value * euroPrice;
+
+				document.querySelector(".card-total-price-product").innerHTML = `total Articles : ${totalProduct}€`;
 			}
-		}
+		});
+
 		sendCart.addEventListener("click", () => {
+			let article = {
+				id: _id,
+				name: name,
+				price: euroPrice,
+				quantity: quantity.value,
+				total: quantity.value * euroPrice,
+			};
+
 			addTeddy(article);
-
-			// supression des doublons dans le panier
-			const removeDuplicates = new Set();
-			console.log(removeDuplicates);
-
-			const filterTeddies = cart.filter((el) => {
-				const duplicate = removeDuplicates.has(el.id);
-				removeDuplicates.add(el.id);
-				return !duplicate;
-			});
-			console.log(filterTeddies);
-
-			if (filterTeddies) {
-				localStorage.setItem("cart", JSON.stringify(filterTeddies));
-			}
 		});
 	})
 	.catch((error) => {

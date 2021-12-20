@@ -51,7 +51,34 @@
 			<img class="card-img-top" src="../backend/images/bear.jpg" alt="" />
 		</div>
 
-		<main id="main-confirm" class="main main-confirm container"></main>
+		<main id="main-confirm" class="main main-confirm container align-items-center">
+			<div class="container-confirm mx-auto mt-5 border border-primary p-2 rounded">
+				<h2 class="text-center col">Recapitulatif de la commande</h2>
+
+				<div class="col text-center">
+					<p>Vous allez etre redirigé sur la page d'accueil dans quelques secondes, autrement cliquez sur le bouton:</p>
+
+					<button class="btn btn-primary" id="reset">retour accueil <span id="counter">10</span> sec.</button>
+					<div class="order"></div>
+					<p><span class="bold lastname"></span>votre commande :</p>
+					<p>numéro : <span class="bold order-id"></span> a bien été prise en compte</p>
+
+					<p>Le montant de votre commande est de : <span class="bold total-price"></span></p>
+				</div>
+				<div class="table-responsive-sm table-confirm">
+					<table class="table table-bordered caption-top table-confirm">
+						<thead>
+							<tr>
+								<th scope="col">Article</th>
+								<th scope="col">Qté</th>
+								<th scope="col">Sous-total</th>
+							</tr>
+						</thead>
+						<tbody id="tbody-confirm"></tbody>
+					</table>
+				</div>
+			</div>
+		</main>
 
 		<!-- Star footer-->
 		<footer id="footer" class="footer container-expand bg-dark">
